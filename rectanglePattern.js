@@ -1,6 +1,3 @@
-let typeOfRectangle = process.argv[2];
-let length = +process.argv[3];
-let width = +process.argv[4];
 
 const generateLines = function(length,Character){
   let line = "";
@@ -15,7 +12,7 @@ const generateFilledRectangle = function(length,width) {
   let line = generateLines(length,"*");
   let rectangle ="";
   while(numberOfLines <= width) {
-    rectangle += line+"\n"
+    rectangle += line+"\n";
     numberOfLines++;
   }
   return rectangle;
@@ -35,10 +32,10 @@ const generateEmptyRectangle = function(length,width) {
   let middlelines = generateMiddleLines(length);
   let emptyRectangle = generateLines(length,"*") +"\n";
   while(numberOfLines < width-1) {
-    emptyRectangle += middlelines +"\n"
-    numberOfLines++
+    emptyRectangle += middlelines +"\n";
+    numberOfLines++;
   }
-  emptyRectangle += generateLines(length,"*")
+  emptyRectangle += generateLines(length,"*");
   return emptyRectangle;
 }
 
@@ -48,20 +45,25 @@ const generateAlternativeRectangle = function(length,width) {
   for(let row = 1;row <= width;row++) {
     let character = "-";
     if(row%2 == 1) {
-      character = "*"
+      character = "*";
     }
     alternatingRectangle += delimitor+generateLines(length,character)
-    delimitor = "\n"
+    delimitor = "\n";
   }
   return alternatingRectangle;
 }
-
-if(typeOfRectangle =="filled"){
-  console.log(generateFilledRectangle(length,width));
+const main = function() {
+  let typeOfRectangle = process.argv[2];
+  let length = +process.argv[3];
+  let width = +process.argv[4];
+  if(typeOfRectangle =="filled"){
+    console.log(generateFilledRectangle(length,width));
+  }
+  if(typeOfRectangle =="empty"){
+    console.log(generateEmptyRectangle(length,width));
+  }
+  if(typeOfRectangle =="alternate"){
+    console.log(generateAlternativeRectangle(length,width));
+  }
 }
-if(typeOfRectangle =="empty"){
-  console.log(generateEmptyRectangle(length,width));
-}
-if(typeOfRectangle =="alternate"){
-  console.log(generateAlternativeRectangle(length,width));
-}
+main();
